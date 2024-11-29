@@ -1,0 +1,6 @@
+{
+    "watch": ["src/"],
+    "ext": "js,ts,html,css,json",
+    "exec": "./restart-docker.sh"
+  }
+  

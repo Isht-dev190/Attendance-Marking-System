@@ -1,0 +1,33 @@
+for fedora 41
+-- create mysql database
+sudo dnf install mysql
+
+-- add dependencies for mysql2 in your connection aka create pool function for database
+const mysql = require('mysql2');
+
+add dependencies like dotenv and fs
+sudo dnf install dotenv
+sudo dnf install fs
+
+
+
+-- get the schema path
+-- login in to your mysql by writing 'mysql -u root' and create a database, for the project create 'attendance_database'
+Note: you must be login as the root user to access the database, by default the value for root is null
+
+-- add the schema in the database
+'mysql -u root attendance_database < ~/Sem5/DB/DBProject/backend/schema.sql'
+--Note absolute paths work in this, if you can work it with a relative path, here's a star for you.
+
+
+
+-- install dbeaver and postman for testing
+-dbeaver is used to test the connection and insert values in the database
+Note: mockaroo is a tool used to get temporary values to put in the database
+-postman is a tool to test API's
+by default our server is running at port 3000
+
+--check admin route for the routes to use to get proper data
+note: In the header of a post request you need to type 'Content-type' under the key section and under the value section write/select 'application/json', and always send the correct
+json format for the functions in the correct order and correct value i.e if a table contains a primary key as id, dont send in the same id again.
+
