@@ -1,0 +1,14 @@
+class id, 1
+class start time
+class end time
+course id, 1
+teacher id, 1
+
+student id 1
+
+
+student functions:
+enroll in a course
+view enrolled courses
+
+

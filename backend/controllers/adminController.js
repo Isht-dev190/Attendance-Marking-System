@@ -1,6 +1,8 @@
 const {
     listAdmins,
-    createTeacherModel,createStudentModel, createCourseModel, createClassModel, listClassesModel, listCourseModel
+    createTeacherModel,createStudentModel, createCourseModel, createClassModel, 
+    listClassesModel, listCourseModel, deleteClassModel, deleteCourseModel, deleteStudentModel,
+    deleteTeacherModel
 
   } = require("../models/AdminModel");
   
@@ -36,18 +38,6 @@ async function getAdmins(req, res) {
       res.status(500).json({message: "Error fetching Courses", error: err});
     }
   }
-
-
-//   async function createStudent(req, res) {
-//     try {
-//         const createstudent = await createStudent();
-//         res.json({data: createstudent});
-
-//     }
-//     catch(err) {
-//         res.status(500).json({message: "Error creating student", error: err});
-//     }
-//   }
 
 
 async function createTeacher(req, res) {
@@ -154,9 +144,73 @@ async function createClass(req,res) {
 }
 
 
+async function deleteClass(req, res) {
+  try {
+      const { class_id } = req.body;
 
+      if (!class_id) {
+          return res.status(400).json({ error: "Class ID is required." });
+      }
+
+      const result = await deleteClassModel(class_id);
+      res.json({ message: `Class with ID ${class_id} deleted successfully`, data: result });
+  } catch (error) {
+      console.error("Error deleting class: ", error);
+      res.status(500).json({ error: "Admin controller issue for deleting class" });
+  }
+}
+
+async function deleteCourse(req, res) {
+  try {
+      const { course_id } = req.body;
+      if (!course_id) {
+          return res.status(400).json({ error: "Course ID is required." });
+      }
+      const result = await deleteCourseModel(course_id);
+
+      // Return a success response
+      res.json({ message: result.message });
+  } catch (err) {
+      console.error("Error deleting course:", err);
+      res.status(500).json({ message: "Error deleting course", error: err.message });
+  }
+}
+
+async function deleteStudent(req, res) {
+  try {
+      const { std_id } = req.body;
+
+      if (!std_id) {
+          return res.status(400).json({ error: "Student ID is required." });
+      }
+      const result = await deleteStudentModel(std_id);
+
+      res.json({ message: result.message });
+  } catch (err) {
+      console.error("Error deleting student:", err);
+      res.status(500).json({ message: "Error deleting student", error: err.message });
+  }
+}
+
+async function deleteTeacher(req, res) {
+  try {
+      const { teacher_id } = req.body;
+
+      if (!teacher_id) {
+          return res.status(400).json({ error: "Teacher ID is required." });
+      }
+
+      const result = await deleteTeacherModel(teacher_id);
+
+      res.json({ message: result.message });
+  } catch (err) {
+      console.error("Error deleting teacher:", err);
+      res.status(500).json({ message: "Error deleting teacher", error: err.message });
+  }
+}
 
   module.exports = {
-    getAdmins, createTeacher, createStudent, createCourse, createClass, getClasses, getCourses
+    getAdmins, createTeacher, createStudent, createCourse, createClass, getClasses, getCourses, 
+    deleteClass, deleteCourse, deleteStudent, deleteTeacher
 
   }

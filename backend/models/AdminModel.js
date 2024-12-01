@@ -42,53 +42,6 @@ async function listCourseModel() {
   }
 }
 
-// async function createstudent(studentData) {
-//   try {
-//     const [result] = await 
-//             db.query(`INSERT INTO STUDENTS (
-//                     std_name, 
-//                     std_email, 
-//                     std_program
-//                 ) VALUES (?, ?, ?)
-//             `, [
-//                 studentData.name, 
-//                 studentData.email, 
-//                 studentData.program
-//             ]);
-
-//             await db.commit();
-//             return result.insertId;
-//         }
-//         catch (error) {
-//             await connection.rollback();
-//             throw error;
-//         }
-//   }
-
-
-// async function createTeacherModel(teacher_name, teacher_email, teacher_department) {
-//   try {
-  
-//   console.log("in teacher model ")
-//     return new Promise((resolve, reject) => {
-//       console.log("In promise")
-//       const [rows] = `INSERT INTO TEACHER (teacher_name, teacher_email, teacher_department) VALUES (?,?,?)`
-//       console.log("Teacher inserted with teacher name: ", teacher_name)
-//       console.log("Teacher inserted with teacher name: ", teacher_email)
-//       console.log("Teacher inserted with teacher name: ", teacher_department)
-//       return {
-//         teacher_name: teacher_name,
-//         teacher_email: teacher_email,
-//         teacher_department: teacher_department
-//     };
-    
-
-//   });
-// } catch(err) {
-//   console.log("Error inserting teacher: ", err);
-//   throw err;
-// }
-//   }
 
   async function createTeacherModel(teacher_name, teacher_email, teacher_department) {
     try {
@@ -110,8 +63,8 @@ async function listCourseModel() {
         };
 
     } catch (err) {
-        console.error("Error inserting teacher:", err);
-        throw err; 
+          console.error("Error inserting teacher:", err);
+          throw err; 
     }
 }
 
@@ -178,7 +131,85 @@ catch(err) {
 }
 }
 
+async function deleteClassModel(class_id) {
+  try {
+      console.log("In delete Class model");
+
+      const query = `DELETE FROM CLASS WHERE class_id = ?`;
+      const [result] = await db.execute(query, [class_id]);
+
+      if (result.affectedRows === 0) {
+          throw new Error(`Class with ID ${class_id} does not exist.`);
+      }
+
+      console.log(`Class with ID ${class_id} deleted successfully.`);
+      return { message: `Class with ID ${class_id} deleted successfully.` };
+  } catch (err) {
+      console.error("Error deleting class: ", err);
+      throw err;
+  }
+}
+
+async function deleteCourseModel(course_id) {
+  try {
+      console.log("In deleteCourseModel");
+      const query = `DELETE FROM COURSE WHERE course_id = ?`;
+      const [result] = await db.execute(query, [course_id]);
+      
+      if (result.affectedRows === 0) {
+          throw new Error(`No course found with id ${course_id}`);
+      }
+
+      console.log(`Course with ID ${course_id} deleted successfully.`);
+      return { message: `Course with ID ${course_id} deleted successfully.` };
+  } catch (err) {
+      console.error("Error deleting course: ", err);
+      throw err;
+  }
+}
+
+
+async function deleteStudentModel(std_id) {
+  try {
+    console.log("In Delete Student Model");
+      const query = `DELETE FROM STUDENTS WHERE std_id = ?`;
+      const [result] = await db.execute(query, [std_id]);
+
+      if (result.affectedRows === 0) {
+          throw new Error(`No student found with id ${std_id}`);
+      }
+
+      return { message: `Student with ID ${std_id} deleted successfully.` };
+  } catch (err) {
+      console.error("Error deleting student:", err);
+      throw err; 
+  }
+}
+
+async function deleteTeacherModel(teacher_id) {
+  try {
+      const query = `DELETE FROM TEACHER WHERE teacher_id = ?`;
+      const [result] = await db.execute(query, [teacher_id]);
+
+      if (result.affectedRows === 0) {
+          throw new Error(`No teacher found with ID ${teacher_id}`);
+      }
+
+      return { message: `Teacher with ID ${teacher_id} deleted successfully.` };
+  } catch (err) {
+      console.error("Error deleting teacher:", err);
+      throw err; 
+  }
+}
 
 
 
-module.exports = { listAdmins, createTeacherModel, createStudentModel, createCourseModel , createClassModel, listClassesModel, listCourseModel};
+
+// --get courses/classes in student/teacher
+// --delete student/teacher/course in admin
+
+
+
+module.exports = { listAdmins, createTeacherModel, createStudentModel, 
+  createCourseModel , createClassModel, listClassesModel, listCourseModel, 
+  deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel};
