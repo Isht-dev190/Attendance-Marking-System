@@ -205,10 +205,6 @@ async function deleteTeacherModel(teacher_id) {
 
 
 
-// --get courses/classes in student/teacher
-// --delete student/teacher/course in admin
-
-
 
 module.exports = { listAdmins, createTeacherModel, createStudentModel, 
   createCourseModel , createClassModel, listClassesModel, listCourseModel, 
