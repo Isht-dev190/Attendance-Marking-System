@@ -1,37 +1,21 @@
-import jwt from 'jsonwebtoken';
+const jwt = require("jsonwebtoken");
 
-export const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
+module.exports = (req, res, next) => {
+  const token = req.header("Authorization");
 
-    if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
-    }
-    try {
-        const decoded = jwt.verify(token, 'your_jwt_secret');
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-};
+  if (!token || !token.startsWith("Bearer ")) {
+    return res.status(401).json({
+      message: "Access denied. No token provided or incorrect format",
+    });
+  }
 
-export const isAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
-        return res.status(403).json({ message: 'Admin access required!' });
-    }
+  try {
+    const actualToken = token.split(" ")[1]; 
+    const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
+    req.user = decoded;
+    console.log(decoded);
     next();
-};
-
-export const isTeacher = (req, res, next) => {
-    if (req.user.role !== 'teacher') {
-        return res.status(403).json({ message: 'Teacher Access Required!' });
-    }
-    next();
-};
-
-export const isStudent = (req, res, next) => {
-    if (req.user.role !== 'student') {
-        return res.status(403).json({ message: 'Student Access Required!' });
-    }
-    next();
+  } catch (error) {
+    res.status(400).json({ message: "Invalid token" });
+  }
 };

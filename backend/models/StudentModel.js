@@ -54,10 +54,22 @@ async function getClassesModel() {
     }
   }
   
-  
+  async function findStudentbyEmail(email) {
+  try{
+    // double check query
+    console.log("In find user function");
+    const query = `SELECT * FROM STUDENTS WHERE email = :email`;
+    const result = await db.execute(query, [email]);
+    return result.rows[0];
+  } catch(err) {
+    console.log(err);
+    throw err;
+  }
+  }
 
 module.exports = {
     viewAttendanceModel,
     courseEnrollModel,
-    getClassesModel, getCourseModel
+    getClassesModel, getCourseModel, findStudentbyEmail
+    // getByStdName
 };

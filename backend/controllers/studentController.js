@@ -1,7 +1,9 @@
 const { json } = require("express");
+const jwt = require('jsonwebtoken');
 const {
     viewAttendanceModel,
-    courseEnrollModel, getClassesModel, getCourseModel
+    courseEnrollModel, getClassesModel, getCourseModel,
+    getByStdName
 } = require("../models/StudentModel")
 
 async function getStudentAttendance(req, res) {

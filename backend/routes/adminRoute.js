@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/adminController");
+const authMiddlewareVerify = require("../middleware/authMiddleware")
 
+router.use(authMiddlewareVerify("Admin"));
 
-router.get("/Adminlist", adminController.getAdmins);
+// router.post("/Adminlist", adminController.getAdmins);
 router.post("/createStudent", adminController.createStudent);
 router.post("/createTeacher", adminController.createTeacher);
 router.post("/createCourse", adminController.createCourse);

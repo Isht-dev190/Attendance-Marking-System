@@ -1,7 +1,7 @@
 {
   "name": "dbproject",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
@@ -14,7 +14,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "fs": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mariadb": "^3.4.0",
     "mysql2": "^3.11.4"
   }

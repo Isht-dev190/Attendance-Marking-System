@@ -4,14 +4,21 @@ const adminRoutes = require('./routes/adminRoute');
 const teacherRoute = require('./routes/teacherRoute');
 const studentRoute = require('./routes/studentRoute')
 const { db, testConnection } = require('./config/db');
+const authRoutes = require("./routes/authRoutes");
+const authMiddleware = require('./middleware/authMiddleware');
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use('/', adminRoutes);
-app.use('/', teacherRoute);
-app.use('/', studentRoute);
+
+// Our app route
+// Dev Notes: Test Rotues
+app.use("/login", authRoutes)
+app.use('/admin', adminRoutes);
+app.use('/teacher', teacherRoute);
+app.use('/student', studentRoute);
 
 
 

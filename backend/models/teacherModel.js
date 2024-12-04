@@ -29,7 +29,20 @@ async function markAttendanceModel(attendance_date, student_id, class_id, std_st
     }
 }
 
+async function findTeacherByEmail(email) {
+    try{
+        // double check query
+        console.log("In find teacher function");
+        const query = `SELECT * FROM TEACHER WHERE teacher_email = :email`;
+        const result = await db.execute(query, [email]);
+        return result.rows[0];
+      } catch(err) {
+        console.log(err);
+        throw err;
+      }
+}
+
 module.exports = {
     getAttendanceModel,
-    markAttendanceModel,
+    markAttendanceModel, findTeacherByEmail
 };

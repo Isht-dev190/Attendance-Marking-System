@@ -2,14 +2,17 @@
 CREATE TABLE IF NOT EXISTS TEACHER (
  teacher_id INT AUTO_INCREMENT PRIMARY KEY,
  teacher_name VARCHAR(255),
+ teacher_password VARCHAR(15) NOT NULL,
  teacher_email VARCHAR(255),
- teacher_department ENUM('CS', 'Maths', 'Finance', 'Social Sciences')NOT NULL);
+ teacher_department ENUM('CS', 'Maths', 'Finance', 'Social Sciences')  NOT NULL);
 
 CREATE TABLE IF NOT EXISTS ADMIN (
  admin_username VARCHAR(30) PRIMARY KEY,
- admin_password VARCHAR(30),
+ admin_email VARCHAR(255) NOT NULL,
+ admin_password VARCHAR(30) NOT NULL,
  admin_position VARCHAR(30)
 );
+
 CREATE TABLE IF NOT EXISTS COURSE (
  course_id INT PRIMARY KEY,
  course_name VARCHAR(255)
@@ -18,8 +21,10 @@ CREATE TABLE IF NOT EXISTS COURSE (
 CREATE TABLE IF NOT EXISTS STUDENTS (
  std_id INT AUTO_INCREMENT PRIMARY KEY,
  std_name VARCHAR(255) NOT NULL,
+std_password VARCHAR(15) NOT NULL,
  std_email VARCHAR(255) UNIQUE NOT NULL,
- std_program ENUM('CS', 'BBA', 'ACF', 'ECO', 'ECOMATH', 'SS') NOT NULL
+ std_program ENUM('CS', 'BBA', 'ACF', 'ECO', 'ECOMATH', 'SS') NOT NULL,
+--  std_password VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS CLASS (

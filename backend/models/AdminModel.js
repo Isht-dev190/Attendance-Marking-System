@@ -2,20 +2,20 @@
 const {db} = require('../config/db'); 
 
 
-//console.log(db);
-async function listAdmins() {
-  try {
-    console.log("In list admins function")
+// //console.log(db);
+// async function listAdmins() {
+//   try {
+//     console.log("In list admins function")
     
-    const [rows] = await db.query('SELECT * FROM ADMIN;');
+//     const [rows] = await db.query('SELECT * FROM ADMIN;');
     
-    console.log(rows);
-    return rows;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
+//     console.log(rows);
+//     return rows;
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// }
 
 async function listClassesModel() {
   try{
@@ -203,9 +203,22 @@ async function deleteTeacherModel(teacher_id) {
 }
 
 
+async function findAdminByEmail(email) {
+  try{
+    // double check query
+    console.log("In find admin function");
+    const query = `SELECT * FROM ADMIN WHERE admin_email = :email`;
+    const result = await db.execute(query, [email]);
+    return result.rows[0];
+  } catch(err) {
+    console.log(err);
+    throw err;
+  }
+}
 
 
-
-module.exports = { listAdmins, createTeacherModel, createStudentModel, 
+module.exports = { createTeacherModel, createStudentModel, 
   createCourseModel , createClassModel, listClassesModel, listCourseModel, 
-  deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel};
+  deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel,
+  findAdminByEmail
+};
