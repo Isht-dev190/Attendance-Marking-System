@@ -26,6 +26,7 @@ Note: you must be login as the root user to access the database, by default the 
 Note: mockaroo is a tool used to get temporary values to put in the database
 -postman is a tool to test API's
 by default our server is running at port 3000
+by default our database is running at port 3306
 
 --check admin route for the routes to use to get proper data
 note: In the header of a post request you need to type 'Content-type' under the key section and under the value section write/select 'application/json', and always send the correct
