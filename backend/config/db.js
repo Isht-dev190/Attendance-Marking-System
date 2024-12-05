@@ -7,10 +7,6 @@ dotenv.config();
 
 console.log("in db.js")
 
-//const schemaPath = './Sem5/DB/DBProject/backend/schema.sql ';
-
-// mysql -u root attendance_database < ./Sem5/DB/DBProject/backend/schema.sql 
-
 console.log("Before create Pool function")
 const db = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',

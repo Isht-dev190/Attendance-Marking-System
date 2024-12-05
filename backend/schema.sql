@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS STUDENTS (
  std_name VARCHAR(255) NOT NULL,
 std_password VARCHAR(15) NOT NULL,
  std_email VARCHAR(255) UNIQUE NOT NULL,
- std_program ENUM('CS', 'BBA', 'ACF', 'ECO', 'ECOMATH', 'SS') NOT NULL,
---  std_password VARCHAR(50)
+ std_program ENUM('CS', 'BBA', 'ACF', 'ECO', 'ECOMATH', 'SS') NOT NULL
+
 );
 
 CREATE TABLE IF NOT EXISTS CLASS (
