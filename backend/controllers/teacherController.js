@@ -6,14 +6,14 @@ getAttendanceModel, markAttendanceModel
 async function getAttendance(req, res) {
     try {
 
-        const { student_id } = req.body;
+        const { student_id, class_id } = req.body;
         if(!student_id) return res.status(400).json({error: 'Incorrect Student ID'});
 
-        const result = await getAttendanceModel(student_id);
+        const result = await getAttendanceModel(student_id, class_id);
         res.json({data: result});
     }
     catch(err) {
-        console.error(error);
+        console.error(err);
         res.status(500).json({error: 'Teacher Controller issue for getting Attendance'})
 
     }

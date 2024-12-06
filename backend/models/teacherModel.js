@@ -1,10 +1,10 @@
 const { db } = require('../config/db');
 
-async function getAttendanceModel(student_id) {
+async function getAttendanceModel(student_id, class_id) {
     try {
         console.log("In get Attendance Model");
-        const query = `CALL VIEWATTENDNCE(?)`; 
-        const [rows] = await db.execute(query, [student_id]);
+        const query = `CALL VIEWATTENDANCE(?,?)`; 
+        const [rows] = await db.execute(query, [student_id, class_id]);
         return rows;
     } catch (error) {
         console.error(`Error getting attendance for student_id: ${student_id}`, error);
@@ -29,20 +29,7 @@ async function markAttendanceModel(attendance_date, student_id, class_id, std_st
     }
 }
 
-async function findTeacherByEmail(email) {
-    try{
-        // double check query
-        console.log("In find teacher function");
-        const query = `SELECT * FROM TEACHER WHERE teacher_email = :email`;
-        const result = await db.execute(query, [email]);
-        return result.rows[0];
-      } catch(err) {
-        console.log(err);
-        throw err;
-      }
-}
-
 module.exports = {
     getAttendanceModel,
-    markAttendanceModel, findTeacherByEmail
+    markAttendanceModel
 };

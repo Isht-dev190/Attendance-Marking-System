@@ -4,8 +4,8 @@ const adminRoutes = require('./routes/adminRoute');
 const teacherRoute = require('./routes/teacherRoute');
 const studentRoute = require('./routes/studentRoute')
 const { db, testConnection } = require('./config/db');
-const authRoutes = require("./routes/authRoutes");
-const authMiddleware = require('./middleware/authMiddleware');
+// const authRoutes = require("./routes/authRoutes");
+// const authMiddleware = require('./middleware/authMiddleware');
 
 
 const app = express();
@@ -15,7 +15,6 @@ app.use(express.urlencoded({extended: true}));
 
 // Our app route
 // Dev Notes: Test Rotues
-app.use("/login", authRoutes)
 app.use('/admin', adminRoutes);
 app.use('/teacher', teacherRoute);
 app.use('/student', studentRoute);
@@ -31,7 +30,7 @@ async function startServer() {
       process.exit(1);
     }
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4000;
     app.listen(PORT, () => {
       console.log(`Server is running at port ${PORT}`);
     });

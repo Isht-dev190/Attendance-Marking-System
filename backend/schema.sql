@@ -2,14 +2,12 @@
 CREATE TABLE IF NOT EXISTS TEACHER (
  teacher_id INT AUTO_INCREMENT PRIMARY KEY,
  teacher_name VARCHAR(255),
- teacher_password VARCHAR(15) NOT NULL,
  teacher_email VARCHAR(255),
  teacher_department ENUM('CS', 'Maths', 'Finance', 'Social Sciences')  NOT NULL);
 
 CREATE TABLE IF NOT EXISTS ADMIN (
  admin_username VARCHAR(30) PRIMARY KEY,
  admin_email VARCHAR(255) NOT NULL,
- admin_password VARCHAR(30) NOT NULL,
  admin_position VARCHAR(30)
 );
 
@@ -21,7 +19,6 @@ CREATE TABLE IF NOT EXISTS COURSE (
 CREATE TABLE IF NOT EXISTS STUDENTS (
  std_id INT AUTO_INCREMENT PRIMARY KEY,
  std_name VARCHAR(255) NOT NULL,
-std_password VARCHAR(15) NOT NULL,
  std_email VARCHAR(255) UNIQUE NOT NULL,
  std_program ENUM('CS', 'BBA', 'ACF', 'ECO', 'ECOMATH', 'SS') NOT NULL
 
@@ -106,21 +103,36 @@ DELIMITER ;
 
 
 
-
 DELIMITER //
 CREATE PROCEDURE VIEWATTENDANCE(
-    IN p_student_id INT
+    IN p_student_id INT,
+    IN p_class_id INT
 )
 BEGIN
     SELECT attendance_date, student_id, class_id, std_status
     FROM ATTENDANCE
-    WHERE student_id = p_student_id;
+    WHERE student_id = p_student_id
+    AND class_id = p_class_id;
 END;
 //
 DELIMITER ;
 
 
-
+DELIMITER //
+CREATE TRIGGER prevent_duplicate_enrollment
+BEFORE INSERT ON ENROLLMENT
+FOR EACH ROW
+BEGIN
+IF EXISTS (
+SELECT 1 FROM ENROLLMENT
+WHERE enr_std_id = NEW.enr_std_id
+AND enr_class_id = NEW.enr_class_id
+) THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'Student is already enrolled in this class.';
+END IF;
+END //
+DELIMITER ;
 
 
 

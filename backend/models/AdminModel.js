@@ -203,22 +203,8 @@ async function deleteTeacherModel(teacher_id) {
 }
 
 
-async function findAdminByEmail(email) {
-  try{
-    // double check query
-    console.log("In find admin function");
-    const query = `SELECT * FROM ADMIN WHERE admin_email = :email`;
-    const result = await db.execute(query, [email]);
-    return result.rows[0];
-  } catch(err) {
-    console.log(err);
-    throw err;
-  }
-}
-
 
 module.exports = { createTeacherModel, createStudentModel, 
   createCourseModel , createClassModel, listClassesModel, listCourseModel, 
-  deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel,
-  findAdminByEmail
+  deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel
 };
