@@ -2,47 +2,6 @@
 const {db} = require('../config/db'); 
 
 
-// //console.log(db);
-// async function listAdmins() {
-//   try {
-//     console.log("In list admins function")
-    
-//     const [rows] = await db.query('SELECT * FROM ADMIN;');
-    
-//     console.log(rows);
-//     return rows;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
-async function listClassesModel() {
-  try{
-    console.log("In list classes function");
-    const [rows] = await db.query('SELECT * FROM CLASS')
-    console.log(rows);
-    return rows;
-  }
-  catch(error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-async function listCourseModel() {
-  try {
-    console.log("In list courses model");
-    const [rows] = await db.query('SELECT * FROM COURSE')
-    console.log(rows);
-    return rows;
-  } catch(error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-
   async function createTeacherModel(teacher_name, teacher_email, teacher_department) {
     try {
         console.log("In teacher model");
@@ -205,6 +164,6 @@ async function deleteTeacherModel(teacher_id) {
 
 
 module.exports = { createTeacherModel, createStudentModel, 
-  createCourseModel , createClassModel, listClassesModel, listCourseModel, 
+  createCourseModel , createClassModel,
   deleteClassModel, deleteCourseModel, deleteStudentModel, deleteTeacherModel
 };

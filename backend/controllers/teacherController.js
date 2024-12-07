@@ -24,7 +24,6 @@ async function markAttendance(req, res) {
     console.log("In teacher controller mark attendance")
     try{
         const {attendance_date, student_id, class_id, std_status} = req.body;
-       // if(!attendance_id) return res.status(400).json({error: 'Incorrect Attendance ID'});
         if(!attendance_date) return res.status(400).json({error: 'Incorrect Attendance Date'});
         if(!student_id) return res.status(400).json({error: 'Incorrect Student ID'});
         if(!class_id) return res.status(400).json({error: 'Incorrect Class ID'});

@@ -1,10 +1,10 @@
 const { db } = require('../config/db');
 
-async function viewAttendanceModel(student_id) {
+async function viewAttendanceModel(student_id, class_id) {
     try {
         console.log("In Attendance Model");
-        const query = `CALL VIEWATTENDANCE (?)`; 
-        const [rows] = await db.execute(query, [student_id]);
+        const query = `CALL VIEWATTENDANCE (?,?)`; 
+        const [rows] = await db.execute(query, [student_id, class_id]);
         return rows;
     } catch (error) {
         console.error(`Error getting student attendance with id: ${student_id}`, error);

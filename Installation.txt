@@ -32,3 +32,6 @@ by default our database is running at port 3306
 note: In the header of a post request you need to type 'Content-type' under the key section and under the value section write/select 'application/json', and always send the correct
 json format for the functions in the correct order and correct value i.e if a table contains a primary key as id, dont send in the same id again.
 
+
+-- to run the code, just install dependencies and run 'npm run dev' to start both the servers, our frontend is running at 
+'localhost:3000'

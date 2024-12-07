@@ -1,8 +1,16 @@
+
+
 {
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "concurrently": "^8.0.1"
   },
   "dependencies": {
     "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && nodemon server.js",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
   }
 }

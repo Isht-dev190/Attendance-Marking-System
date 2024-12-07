@@ -9,10 +9,10 @@ const {
 async function getStudentAttendance(req, res) {
     try{
 
-        const {student_id}= req.body;
+        const {student_id, class_id}= req.body;
         if(!student_id) return res.status(400).json({error: 'Incorrect Student ID'});
 
-        const result = await viewAttendanceModel(student_id);
+        const result = await viewAttendanceModel(class_id,student_id);
         res.json({data: result}); 
     } catch(err) {
         console.error(err);

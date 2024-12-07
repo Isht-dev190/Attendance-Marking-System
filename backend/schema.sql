@@ -105,14 +105,13 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE VIEWATTENDANCE(
-    IN p_student_id INT,
+    In p_student_id INT,
     IN p_class_id INT
 )
 BEGIN
     SELECT attendance_date, student_id, class_id, std_status
     FROM ATTENDANCE
-    WHERE student_id = p_student_id
-    AND class_id = p_class_id;
+    WHERE student_id = p_student_id AND class_id = p_class_id;
 END;
 //
 DELIMITER ;

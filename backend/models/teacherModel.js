@@ -1,6 +1,6 @@
 const { db } = require('../config/db');
 
-async function getAttendanceModel(student_id, class_id) {
+async function getAttendanceModel(student_id,class_id) {
     try {
         console.log("In get Attendance Model");
         const query = `CALL VIEWATTENDANCE(?,?)`; 

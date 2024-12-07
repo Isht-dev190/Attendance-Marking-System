@@ -1,45 +1,11 @@
 const {
-    listAdmins,
+
     createTeacherModel,createStudentModel, createCourseModel, createClassModel, 
-    listClassesModel, listCourseModel, deleteClassModel, deleteCourseModel, deleteStudentModel,
+   deleteClassModel, deleteCourseModel, deleteStudentModel,
     deleteTeacherModel
 
   } = require("../models/AdminModel");
   
-
-async function getAdmins(req, res) {
-    try {
-      const listadmins= await listAdmins();
-  
-      res.json({ data: listadmins });
-    } catch (err) {
-      res.status(500).json({ message: "Error fetching Admins", error: err });
-    }
-  }
-  
-
-
-  async function getClasses(req, res) {
-    try {
-      const listclasses = await listClassesModel();
-      res.json({ data: listclasses});
-
-    }
-    catch (err) {
-      res.status(500).json({ message: "Error fetching Classes", error: err });}
-  }
-
-  async function getCourses(req, res) {
-    try {
-      const listcourses = await listCourseModel();
-      res.json({data: listcourses});
-
-    } catch(err) {
-      res.status(500).json({message: "Error fetching Courses", error: err});
-    }
-  }
-
-
 async function createTeacher(req, res) {
     try {
 
@@ -210,7 +176,7 @@ async function deleteTeacher(req, res) {
 }
 
   module.exports = {
-    getAdmins, createTeacher, createStudent, createCourse, createClass, getClasses, getCourses, 
+   createTeacher, createStudent, createCourse, createClass,
     deleteClass, deleteCourse, deleteStudent, deleteTeacher
 
   }
