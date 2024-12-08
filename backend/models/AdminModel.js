@@ -5,7 +5,7 @@ const {db} = require('../config/db');
   async function createTeacherModel(teacher_name, teacher_email, teacher_department) {
     try {
         console.log("In teacher model");
-
+        db.query("INSERT IGNORE INTO DEPARTMENT (department_name) VALUES ('CS'), ('Maths'), ('Finance'), ('Social Sciences')")
         const query = `INSERT INTO TEACHER (teacher_name, teacher_email, teacher_department) VALUES (?, ?, ?)`;
 
         const [result] = await db.execute(query, [teacher_name, teacher_email, teacher_department]);
@@ -31,6 +31,7 @@ const {db} = require('../config/db');
 async function createStudentModel(std_name, std_email, std_program) {
   try {
       console.log("In create  student model")
+      db.query("INSERT IGNORE INTO PROGRAM (program_name) VALUES ('CS'), ('BBA'), ('ACF'), ('ECO'), ('ECOMATH'), ('SS')");
       const query = `INSERT INTO STUDENTS (std_name, std_email, std_program) VALUES (?, ?, ?)`;
 
       const [result] = await db.execute(query, [std_name, std_email, std_program]);
