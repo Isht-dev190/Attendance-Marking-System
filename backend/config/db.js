@@ -23,6 +23,7 @@ async function testConnection() {
   try {
       await db.query('SELECT 1');
       console.log('Database connection successful. ');
+      
       return true;
   }
   catch(error) {
